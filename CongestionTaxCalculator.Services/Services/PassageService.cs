@@ -76,7 +76,7 @@ namespace CongestionTaxCalculator.Services.Services
             var vehicleType = vehicle.VehicleType;
             var tariff = _tariffService.GetTariff(timestamp, zoneId);
 
-            var isZeroCost = vehicleType.IsTaxExempt || TimestampIsTollFree(timestamp, zoneId);
+            var isZeroCost = vehicleType.IsTaxExempt || TimestampIsTollFree(timestamp, zoneId) || MaximumTollAmountReached(vehicle.Id, timestamp);
 
             return new Passage()
             {
@@ -86,6 +86,21 @@ namespace CongestionTaxCalculator.Services.Services
                 VehicleId = vehicle.Id,
                 ZeroCost = isZeroCost
             };
+        }
+
+        private bool MaximumTollAmountReached(int vehicleId, DateTime timestamp)
+        {
+            var passagesTodayWithActiveCost = GetByVehicleId(vehicleId).Where(x => x.TimeStamp.DayOfYear == timestamp.DayOfYear 
+                && x.TimeStamp.Year == timestamp.Year 
+                && !x.ZeroCost);
+
+            //60 is a magic number (shame on me), should be represented in the rule settings in DB but ran out of time 
+            if (passagesTodayWithActiveCost.Sum(x => x.Tariff.Price) >= 60)
+            {
+                return true;
+            }
+
+            return false;
         }
 
         private void UpdatePaymentPeriod(Passage passage)
