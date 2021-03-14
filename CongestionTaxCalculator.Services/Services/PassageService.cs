@@ -19,8 +19,8 @@ namespace CongestionTaxCalculator.Services.Services
         private IZoneService _zoneService;
         private IMapper _mapper;
 
-        public PassageService(IDataContext dataContext, 
-            ITaxService taxService, 
+        public PassageService(IDataContext dataContext,
+            ITaxService taxService,
             IVehicleService vehicleService,
             ITariffService tariffService, IZoneService zoneService, IMapper mapper)
         {
@@ -31,7 +31,7 @@ namespace CongestionTaxCalculator.Services.Services
             _zoneService = zoneService;
             _mapper = mapper;
         }
-        
+
         public PassageDto Save(RegisterPassage registerPassage)
         {
             var timestamp = DateTime.Now;
@@ -39,7 +39,7 @@ namespace CongestionTaxCalculator.Services.Services
             var zone = _zoneService.GetById(registerPassage.ZoneId);
 
             var passage = CreatePassage(timestamp, vehicle.RegNumber, registerPassage.ZoneId);
-            
+
             if (!passage.ZeroCost && zone.SingleChargeRule)
             {
                 if (IsPassageStartOfPaymentPeriod(timestamp, vehicle.Id, zone.Id))
@@ -47,7 +47,7 @@ namespace CongestionTaxCalculator.Services.Services
                     passage.StartOfPaymentPeriod = true;
                 }
                 else
-                { 
+                {
                     UpdatePaymentPeriod(passage);
                 }
             }
@@ -71,8 +71,6 @@ namespace CongestionTaxCalculator.Services.Services
         public Passage CreatePassage(DateTime timestamp, string regNumber, int zoneId)
         {
             var vehicle = _vehicleService.GetByRegNumber(regNumber);
-            var zone = _zoneService.GetById(zoneId);
-
             var vehicleType = vehicle.VehicleType;
             var tariff = _tariffService.GetTariff(timestamp, zoneId);
 
@@ -90,8 +88,8 @@ namespace CongestionTaxCalculator.Services.Services
 
         private bool MaximumTollAmountReached(int vehicleId, DateTime timestamp)
         {
-            var passagesTodayWithActiveCost = GetByVehicleId(vehicleId).Where(x => x.TimeStamp.DayOfYear == timestamp.DayOfYear 
-                && x.TimeStamp.Year == timestamp.Year 
+            var passagesTodayWithActiveCost = GetByVehicleId(vehicleId).Where(x => x.TimeStamp.DayOfYear == timestamp.DayOfYear
+                && x.TimeStamp.Year == timestamp.Year
                 && !x.ZeroCost);
 
             //60 is a magic number (shame on me), should be represented in the rule settings in DB but ran out of time 
@@ -105,20 +103,33 @@ namespace CongestionTaxCalculator.Services.Services
 
         private void UpdatePaymentPeriod(Passage passage)
         {
-            var passagesForVehicleLastHour = GetByVehicleId(passage.VehicleId).Where(x => x.TimeStamp > passage.TimeStamp.AddMinutes(-60)).ToList();
+            var costingPassagesLastHour = GetByVehicleId(passage.VehicleId).Where(x => x.TimeStamp > passage.TimeStamp.AddMinutes(-60) && !x.ZeroCost).ToList();
 
-            var paymentPeriodStartPassage = passagesForVehicleLastHour.FirstOrDefault(x => x.StartOfPaymentPeriod);
+            var paymentPeriodStartPassage = costingPassagesLastHour.FirstOrDefault(x => x.StartOfPaymentPeriod);
 
-            var tariffForPassage = _tariffService.GetById(passage.TariffId);
-
-            if (paymentPeriodStartPassage != null && tariffForPassage.Price > paymentPeriodStartPassage.Tariff.Price)
+            if (paymentPeriodStartPassage != null)
             {
-                paymentPeriodStartPassage.ZeroCost = true;
-                _dataContext.Passages.Update(paymentPeriodStartPassage);
-            }
-            else
-            {
-                passage.ZeroCost = true;
+                var passagesInCurrentPeriod =
+                    costingPassagesLastHour.Where(x => x.TimeStamp >= paymentPeriodStartPassage.TimeStamp).ToList();
+
+                var tariff = _tariffService.GetById(passage.TariffId);
+
+                var passageWithHigherPrice =
+                    passagesInCurrentPeriod.FirstOrDefault(x => x.Tariff.Price > tariff.Price);
+
+                if (passageWithHigherPrice == null)
+                {
+                    foreach (var pas in passagesInCurrentPeriod)
+                    {
+                        pas.ZeroCost = true;
+                        _dataContext.Passages.Update(paymentPeriodStartPassage);
+                    }
+                }
+                else
+                {
+                    passage.ZeroCost = true;
+                    _dataContext.Passages.Update(passage);
+                }
             }
         }
 
@@ -140,7 +151,7 @@ namespace CongestionTaxCalculator.Services.Services
 
             return false;
         }
-        
+
         private bool TimestampIsTollFree(DateTime date, int zoneId)
         {
             int year = date.Year;
@@ -168,7 +179,7 @@ namespace CongestionTaxCalculator.Services.Services
                     return true;
                 }
             }
-            
+
             if (taxFreeDays.Any(x =>
                 (date.Date == x.Date) ||
                 (date.DayOfWeek == x.Date.DayOfWeek && x.RecurringWeekly)))
