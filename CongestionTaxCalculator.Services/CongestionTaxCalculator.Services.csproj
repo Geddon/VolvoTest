@@ -1,0 +1,18 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Library</OutputType>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <RootNamespace>CongestionTaxCalculator.Services</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="8.1.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\CongestionTaxCalculator.Data\CongestionTaxCalculator.Data.csproj" />
+    <ProjectReference Include="..\CongestionTaxCalculator\CongestionTax.Contracts\CongestionTax.Contracts.csproj" />
+  </ItemGroup>
+
+</Project>
