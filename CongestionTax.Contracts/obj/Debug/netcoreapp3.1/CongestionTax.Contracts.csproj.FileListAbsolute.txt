@@ -10,3 +10,15 @@ C:\repos\VolvoTest\CongestionTaxCalculator\CongestionTax.Contracts\bin\Debug\net
 C:\repos\VolvoTest\CongestionTaxCalculator\CongestionTax.Contracts\obj\Debug\netcoreapp3.1\CongestionTax.Contracts.csproj.CopyComplete
 C:\repos\VolvoTest\CongestionTaxCalculator\CongestionTax.Contracts\obj\Debug\netcoreapp3.1\CongestionTax.Contracts.dll
 C:\repos\VolvoTest\CongestionTaxCalculator\CongestionTax.Contracts\obj\Debug\netcoreapp3.1\CongestionTax.Contracts.pdb
+C:\repos\VolvoTest\CongestionTax.Contracts\bin\Debug\netcoreapp3.1\CongestionTax.Contracts.deps.json
+C:\repos\VolvoTest\CongestionTax.Contracts\bin\Debug\netcoreapp3.1\CongestionTax.Contracts.dll
+C:\repos\VolvoTest\CongestionTax.Contracts\bin\Debug\netcoreapp3.1\CongestionTax.Contracts.pdb
+C:\repos\VolvoTest\CongestionTax.Contracts\bin\Debug\netcoreapp3.1\CongestionTaxCalculator.Data.dll
+C:\repos\VolvoTest\CongestionTax.Contracts\bin\Debug\netcoreapp3.1\CongestionTaxCalculator.Data.pdb
+C:\repos\VolvoTest\CongestionTax.Contracts\obj\Debug\netcoreapp3.1\CongestionTax.Contracts.csprojAssemblyReference.cache
+C:\repos\VolvoTest\CongestionTax.Contracts\obj\Debug\netcoreapp3.1\CongestionTax.Contracts.AssemblyInfoInputs.cache
+C:\repos\VolvoTest\CongestionTax.Contracts\obj\Debug\netcoreapp3.1\CongestionTax.Contracts.AssemblyInfo.cs
+C:\repos\VolvoTest\CongestionTax.Contracts\obj\Debug\netcoreapp3.1\CongestionTax.Contracts.csproj.CoreCompileInputs.cache
+C:\repos\VolvoTest\CongestionTax.Contracts\obj\Debug\netcoreapp3.1\CongestionTax.Contracts.csproj.CopyComplete
+C:\repos\VolvoTest\CongestionTax.Contracts\obj\Debug\netcoreapp3.1\CongestionTax.Contracts.dll
+C:\repos\VolvoTest\CongestionTax.Contracts\obj\Debug\netcoreapp3.1\CongestionTax.Contracts.pdb

@@ -26,6 +26,7 @@
         "dependencies": {
           "AutoMapper.Collection.EntityFrameworkCore": "7.0.1",
           "AutoMapper.Extensions.Microsoft.DependencyInjection": "8.1.1",
+          "CongestionTax.Contracts": "1.0.0",
           "CongestionTaxCalculator.Data": "1.0.0",
           "CongestionTaxCalculator.Services": "1.0.0",
           "Microsoft.AspNetCore.Mvc.NewtonsoftJson": "3.1.0",

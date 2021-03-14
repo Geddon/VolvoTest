@@ -3,11 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30907.101
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CongestionTaxCalculator.Api", "..\CongestionTaxCalculator.Api\CongestionTaxCalculator.Api.csproj", "{5606E475-93AD-47C8-ADD2-5608414F0A4D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CongestionTaxCalculator.Api", "CongestionTaxCalculator.Api\CongestionTaxCalculator.Api.csproj", "{5606E475-93AD-47C8-ADD2-5608414F0A4D}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CongestionTaxCalculator.Data", "..\CongestionTaxCalculator.Data\CongestionTaxCalculator.Data.csproj", "{5A98FB57-DDF6-47B2-9ACB-41F79F050575}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CongestionTaxCalculator.Data", "CongestionTaxCalculator.Data\CongestionTaxCalculator.Data.csproj", "{5A98FB57-DDF6-47B2-9ACB-41F79F050575}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CongestionTaxCalculator.Services", "..\CongestionTaxCalculator.Services\CongestionTaxCalculator.Services.csproj", "{77980BD9-E7E0-4CD7-B8E3-5625DCCEB553}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CongestionTaxCalculator.Services", "CongestionTaxCalculator.Services\CongestionTaxCalculator.Services.csproj", "{77980BD9-E7E0-4CD7-B8E3-5625DCCEB553}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CongestionTax.Contracts", "CongestionTax.Contracts\CongestionTax.Contracts.csproj", "{1F83CB99-66DC-43C4-90F8-EA07684AEE90}"
 EndProject
