@@ -103,7 +103,7 @@ namespace CongestionTaxCalculator.Services.Services
 
         private void UpdatePaymentPeriod(Passage passage)
         {
-            var costingPassagesLastHour = GetByVehicleId(passage.VehicleId).Where(x => x.TimeStamp > passage.TimeStamp.AddMinutes(-60) && !x.ZeroCost).ToList();
+            var costingPassagesLastHour = GetByVehicleId(passage.VehicleId).Where(x => x.TimeStamp > passage.TimeStamp.AddMinutes(-60) && !x.ZeroCost || x.StartOfPaymentPeriod).ToList();
 
             var paymentPeriodStartPassage = costingPassagesLastHour.FirstOrDefault(x => x.StartOfPaymentPeriod);
 
@@ -115,7 +115,7 @@ namespace CongestionTaxCalculator.Services.Services
                 var tariff = _tariffService.GetById(passage.TariffId);
 
                 var passageWithHigherPrice =
-                    passagesInCurrentPeriod.FirstOrDefault(x => x.Tariff.Price > tariff.Price);
+                    passagesInCurrentPeriod.FirstOrDefault(x => x.Tariff.Price >= tariff.Price);
 
                 if (passageWithHigherPrice == null)
                 {

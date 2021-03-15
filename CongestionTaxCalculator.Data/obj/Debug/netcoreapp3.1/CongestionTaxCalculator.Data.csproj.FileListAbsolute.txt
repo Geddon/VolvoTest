@@ -37,3 +37,4 @@ C:\repos\VolvoTest\CongestionTaxCalculator.Data\obj\Debug\netcoreapp3.1\Congesti
 C:\repos\VolvoTest\CongestionTaxCalculator.Data\obj\Debug\netcoreapp3.1\CongestionTaxCalculator.Data.dll
 C:\repos\VolvoTest\CongestionTaxCalculator.Data\obj\Debug\netcoreapp3.1\CongestionTaxCalculator.Data.pdb
 C:\repos\VolvoTest\CongestionTaxCalculator.Data\obj\Debug\netcoreapp3.1\CongestionTaxCalculator.Data.genruntimeconfig.cache
+C:\repos\VolvoTest\CongestionTaxCalculator.Data\obj\Debug\netcoreapp3.1\CongestionTaxCalculator.Data.csprojAssemblyReference.cache
